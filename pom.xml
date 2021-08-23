@@ -190,6 +190,12 @@
             </configuration>
           </execution>
         </executions>
+        <configuration>
+          <layers>
+            <enabled>true</enabled>
+            <configuration>${project.basedir}/src/layers.xml</configuration>
+          </layers>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>
