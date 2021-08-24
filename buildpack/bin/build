@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo "Running Jattach Buildpack"
+
+set -x
+
+layers_dir="$1"
+mkdir -p "$layers_dir"/jattach/bin
+curl -L --output "$layers_dir"/jattach/bin/jattach https://github.com/apangin/jattach/releases/download/v2.0/jattach
+chmod +x "$layers_dir"/jattach/bin/jattach
+
+cat <<EOF > "$layers_dir"/jattach.toml
+[types]
+  launch = true
+EOF
+
+cat <<EOF > "$layers_dir"/launch.toml
+[[processes]]
+  type = "jattach"
+  command = "jattach"
+  args = ["1"]
+  direct = true
+EOF
